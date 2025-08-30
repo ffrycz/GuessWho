@@ -1,6 +1,7 @@
 package org.guessWhoApp;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Window extends JFrame {
 
@@ -11,6 +12,7 @@ public class Window extends JFrame {
         super("Guess Who");
         setSize(1280, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
 
         JMenuBar bar = new JMenuBar();
 
@@ -27,11 +29,24 @@ public class Window extends JFrame {
             String[] imageList = loader.loadDirectory();
             if (imageList != null) {
                 setImages(imageList);
+                display();
             }
         });
+
+        setVisible(true);
     }
 
     public void setImages(String[] images){
         this.images = images;
+    }
+
+
+    public void display() {
+        for (String image : images) {
+            add(new CharacterPanel(image));
+
+        }
+    pack();
+
     }
 }
