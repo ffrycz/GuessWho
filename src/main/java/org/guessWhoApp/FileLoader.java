@@ -29,16 +29,15 @@ public class FileLoader {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(parentFrame, "Błąd odczytu: " + e.getMessage());
+            return null;
         }
-        return null;
     }
 
     public String[] getImages(File directory) {
         String[] imageList = directory.list();
         if (imageList.length > 24) {
-            return Arrays.stream(imageList).limit(24).toArray(String[]::new);
-        }else{
-            return imageList;
+            imageList = Arrays.stream(imageList).limit(24).toArray(String[]::new);
         }
+        return Arrays.stream(imageList).map(file -> directory.getAbsolutePath() + "\\" + file).toArray(String[]::new);
     }
 }

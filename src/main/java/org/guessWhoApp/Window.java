@@ -27,6 +27,9 @@ public class Window extends JFrame {
 
         openFile.addActionListener(e -> {
             String[] imageList = loader.loadDirectory();
+            for (String image : imageList) {
+                System.out.println(image);
+            }
             if (imageList != null) {
                 setImages(imageList);
                 display();
@@ -44,9 +47,9 @@ public class Window extends JFrame {
     public void display() {
         for (String image : images) {
             add(new CharacterPanel(image));
+            pack();
 
         }
-    pack();
 
     }
 }
