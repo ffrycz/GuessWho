@@ -2,14 +2,17 @@ package org.guessWhoApp;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class CharacterPanel extends JPanel {
     private Image image;
     private String name;
+    final private String path;
 
-    public CharacterPanel(String imagePath) {
-        this.image = new ImageIcon(imagePath).getImage();
-        this.name = imagePath.replaceFirst("[.][^.]+$", "");
+    public CharacterPanel(File image) {
+        this.path = image.getAbsolutePath();
+        this.image = new ImageIcon(path).getImage();
+        this.name = image.getName().replaceFirst("[.][^.]+$", "");
         setPreferredSize(new Dimension(180, 300));
         setLayout(new BorderLayout());
 

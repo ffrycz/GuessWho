@@ -12,7 +12,7 @@ public class FileLoader {
         this.parentFrame = parentFrame;
     }
 
-    public String[] loadDirectory() {
+    public File[] loadDirectory() {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
@@ -33,11 +33,11 @@ public class FileLoader {
         }
     }
 
-    public String[] getImages(File directory) {
-        String[] imageList = directory.list();
-        if (imageList.length > 24) {
-            imageList = Arrays.stream(imageList).limit(24).toArray(String[]::new);
+    public File[] getImages(File directory) {
+        File[] imageList = directory.listFiles();
+        if (imageList.length > 24){
+            imageList = Arrays.stream(imageList).limit(24).toArray(File[]::new);
         }
-        return Arrays.stream(imageList).map(file -> directory.getAbsolutePath() + "\\" + file).toArray(String[]::new);
+        return imageList;
     }
 }

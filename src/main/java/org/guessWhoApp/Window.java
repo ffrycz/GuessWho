@@ -2,10 +2,11 @@ package org.guessWhoApp;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class Window extends JFrame {
 
-    private String[] images;
+    private File[] images;
 
     public Window() {
 
@@ -26,8 +27,8 @@ public class Window extends JFrame {
         FileLoader loader = new FileLoader(this);
 
         openFile.addActionListener(e -> {
-            String[] imageList = loader.loadDirectory();
-            for (String image : imageList) {
+            File[] imageList = loader.loadDirectory();
+            for (File image : imageList) {
                 System.out.println(image);
             }
             if (imageList != null) {
@@ -39,13 +40,13 @@ public class Window extends JFrame {
         setVisible(true);
     }
 
-    public void setImages(String[] images){
+    public void setImages(File[] images){
         this.images = images;
     }
 
 
     public void display() {
-        for (String image : images) {
+        for (File image : images) {
             add(new CharacterPanel(image));
             pack();
 
