@@ -1,19 +1,24 @@
 package org.guessWhoApp;
 
+import ij.IJ;
+import ij.ImagePlus;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class CharacterPanel extends JPanel {
-    private Image image;
+public class CharacterPanel extends JLayeredPane {
+    private ImagePlus image;
     private String name;
     final private String path;
 
     public CharacterPanel(File image) {
         this.path = image.getAbsolutePath();
-        this.image = new ImageIcon(path).getImage();
+        this.image = IJ.openImage(path);
         this.name = image.getName().replaceFirst("[.][^.]+$", "");
         setPreferredSize(new Dimension(180, 300));
+        setBounds(0, 0, 180, 300);
+        setOpaque(true);
         setLayout(new BorderLayout());
 
         JLabel label = new JLabel(name, SwingConstants.CENTER);
@@ -29,7 +34,7 @@ public class CharacterPanel extends JPanel {
         int cardWidth = getWidth();
         int imageHeight = getHeight() - 40;
 
-        double imgAspect = (double) image.getWidth(null) / image.getHeight(null);
+        double imgAspect = (double) image.getWidth() / image.getHeight();
         double panelAspect = (double) cardWidth / imageHeight;
 
         int drawWidth, drawHeight, drawX, drawY;
@@ -46,6 +51,6 @@ public class CharacterPanel extends JPanel {
             drawY = (imageHeight - drawHeight) / 2;
         }
 
-        g.drawImage(image, drawX, drawY, drawWidth, drawHeight, this);
+        g.drawImage(image.getImage(), drawX, drawY, drawWidth, drawHeight, this);
     }
 }
